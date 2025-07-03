@@ -68,19 +68,19 @@ Working Directory   --->  Staging Area (Index)   --->  Git Repository (Committed
 ### Example workflow commands
 
 ```bash
-# Check current status
+#Check current status
 git status
 
-# Stage a file
+#Stage a file
 git add file.txt
 
-# Commit staged changes
+#Commit staged changes
 git commit -m "Add updates to file.txt"
 
-# Unstage a file
+#Unstage a file
 git reset file.txt
 
-# Discard local changes (unstaged)
+#Discard local changes (unstaged)
 git checkout -- file.txt
 ```
 
