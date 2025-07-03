@@ -1,6 +1,6 @@
 <h1 align="center">🚀 DevOps: Baby to Boss 🍼👨‍💻👑</h1>
 <p align="center">
-  <b>Zero to Hero DevOps Series</b> — Learn every tool hands-on with real projects, workflows, and interview prep!
+  <b>Baby to Boss DevOps Series</b> — Learn every tool hands-on with real projects, workflows, and interview prep!
 </p>
 
 <p align="center">
