@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# sanity-check.sh - 🚀 Proactive DevOps Daily Health Script 🚀
-# Author: Vijay Kumar Anuganti
-# Date: $(date +%Y-%m-%d)
+#sanity-check.sh - 🚀 Proactive DevOps Daily Health Script 🚀
+#Author: Vijay Kumar Anuganti
+#Date: $(date +%Y-%m-%d)
 
 set -euo pipefail
 IFS=$'\n\t'
 
-# === CONFIGURATION ===
+#=== CONFIGURATION ===
 PROD_URL="https://api.myapp.com/health"
 STAGING_URL="https://staging.myapp.com/health"
 CICD_API="https://ci.mycompany.com/api/job/status"
@@ -15,18 +15,18 @@ DISK_THRESHOLD=80
 LOG_FILE="/var/log/myapp/app.log"
 SANITY_LOG="./sanity-check.log"
 
-# === COLORS ===
+#=== COLORS ===
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 YELLOW="\033[1;33m"
 NC="\033[0m" # No Color
 
-# === LOGGING ===
+#=== LOGGING ===
 exec > >(tee -a "$SANITY_LOG") 2>&1
 
 echo -e "${YELLOW}===== SANITY CHECK STARTED: $(date) =====${NC}"
 
-# === UTILS ===
+#=== UTILS ===
 check_command() {
   command -v "$1" &>/dev/null || {
     echo -e "${RED}❌ Required command '$1' not found. Exiting.${NC}"
@@ -37,7 +37,7 @@ check_command() {
 http_check() {
   local url=$1
   if curl -fs --max-time 5 "$url" >/dev/null; then
-    echo -e "${GREEN}✅ $url is healthy${NC}"
+    echo -e "${GREEN}🫰 $url is healthy${NC}"
   else
     echo -e "${RED}❌ $url is not responding${NC}"
     return 1
@@ -61,13 +61,13 @@ retry() {
   done
 }
 
-# === CHECKS ===
+#=== CHECKS ===
 
 check_ping() {
   echo -e "\n🌐 ${YELLOW}Pinging Hosts...${NC}"
   for host in api.myapp.com staging.myapp.com; do
     if ping -c 2 "$host" &>/dev/null; then
-      echo -e "${GREEN}✅ $host is reachable${NC}"
+      echo -e "${GREEN}🫰 $host is reachable${NC}"
     else
       echo -e "${RED}❌ $host is unreachable${NC}"
     fi
@@ -95,7 +95,7 @@ check_disk_space() {
   if (( usage > DISK_THRESHOLD )); then
     echo -e "${RED}⚠️  Disk usage is high: $usage%${NC}"
   else
-    echo -e "${GREEN}✅ Disk usage is healthy: $usage%${NC}"
+    echo -e "${GREEN}🫰 Disk usage is healthy: $usage%${NC}"
   fi
 }
 
@@ -108,7 +108,7 @@ check_k8s_health() {
       echo -e "${RED}❌ Non-running pods found:${NC}"
       echo "$bad_pods"
     else
-      echo -e "${GREEN}✅ All pods are running cleanly${NC}"
+      echo -e "${GREEN}🫰 All pods are running cleanly${NC}"
     fi
   else
     echo -e "${YELLOW}⚠️  kubectl not installed. Skipping K8s check.${NC}"
@@ -124,7 +124,7 @@ scan_logs() {
       echo -e "${RED}❌ Recent Errors Detected:${NC}"
       echo "$errors"
     else
-      echo -e "${GREEN}✅ No recent 'error' entries in logs${NC}"
+      echo -e "${GREEN}🫰 No recent 'error' entries in logs${NC}"
     fi
   else
     echo -e "${YELLOW}⚠️  Log file not found: $LOG_FILE${NC}"
@@ -135,7 +135,7 @@ summary() {
   echo -e "\n${YELLOW}===== SANITY CHECK COMPLETED: $(date) =====${NC}"
 }
 
-# === MAIN ===
+#=== MAIN ===
 main() {
   check_ping
   check_http_health
